@@ -1,0 +1,67 @@
+# Default configuration for social network analysis
+defaults:
+  - _self_
+
+# Dataset configuration
+dataset:
+  name: "synthetic"
+  n_nodes: 1000
+  network_type: "barabasi_albert"  # barabasi_albert, watts_strogatz, erdos_renyi, stochastic_block
+  feature_type: "random"  # random, degree, centrality, community
+  label_type: "community"  # community, random, degree_based
+  n_features: 10
+  n_classes: 5
+  train_ratio: 0.6
+  val_ratio: 0.2
+  test_ratio: 0.2
+
+# Model configuration
+model:
+  name: "GCN"  # GCN, GraphSAGE, GAT
+  input_dim: 10
+  hidden_dim: 64
+  output_dim: 5
+  num_layers: 2
+  dropout: 0.5
+  use_batch_norm: true
+  
+  # GAT specific
+  num_heads: 8
+  
+  # GraphSAGE specific
+  aggregator: "mean"  # mean, max, lstm
+
+# Training configuration
+training:
+  epochs: 100
+  learning_rate: 0.01
+  weight_decay: 5e-4
+  optimizer: "adam"  # adam, adamw
+  scheduler: "reduce_on_plateau"  # reduce_on_plateau, cosine, null
+  patience: 10
+  batch_size: 1  # For full-batch training
+  
+# Evaluation configuration
+evaluation:
+  metrics: ["accuracy", "f1_macro", "f1_micro", "auc"]
+  save_predictions: true
+  create_leaderboard: true
+
+# Logging configuration
+logging:
+  log_dir: "logs"
+  use_wandb: false
+  use_tensorboard: true
+  log_interval: 10
+
+# Device configuration
+device:
+  use_cuda: true
+  use_mps: true  # Apple Silicon
+  seed: 42
+
+# Paths
+paths:
+  data_dir: "data"
+  checkpoint_dir: "checkpoints"
+  output_dir: "outputs"

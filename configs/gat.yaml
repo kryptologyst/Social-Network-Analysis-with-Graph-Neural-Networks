@@ -1,0 +1,16 @@
+# Configuration for GAT model
+defaults:
+  - default
+
+model:
+  name: "GAT"
+  hidden_dim: 128
+  num_heads: 8
+  num_layers: 3
+  dropout: 0.3
+
+training:
+  learning_rate: 0.005
+  epochs: 150
+  optimizer: "adamw"
+  scheduler: "cosine"
